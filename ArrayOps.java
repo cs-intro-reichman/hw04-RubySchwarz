@@ -2,6 +2,7 @@ public class ArrayOps {
 
     public static void main(String[] args) {
         // Test the methods with example data
+        System.out.println(secondMaxValue(new int[]{2, 8, 3, 7, 8}));  // Expected: 8
     }
     
     // Method to find the missing integer in an array
@@ -17,21 +18,27 @@ public class ArrayOps {
 
     // Revised method to find the second maximum value in an array
     public static int secondMaxValue(int[] array) {
-        Integer max = null;
-        Integer secondMax = null;
-
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
+        
         for (int num : array) {
-            if (max == null || num > max) {
+            if (num > max) {
                 secondMax = max;
                 max = num;
-            } else if ((secondMax == null || num > secondMax) && num != max) {
+            } else if (num > secondMax && num != max) {
                 secondMax = num;
             }
         }
+
+        // In case the largest number appears more than once
+        if (secondMax == Integer.MIN_VALUE) {
+            return max;
+        }
+
         return secondMax;
     }
 
-    // Revised method to check if two arrays contain the same elements
+    // Method to check if two arrays contain the same elements
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
         java.util.HashSet<Integer> set1 = new java.util.HashSet<>();
         for (int num : array1) {
