@@ -16,18 +16,25 @@ public class StringOps {
     }
 
     // Function to convert string into camelCase
-    public static String camelCase(String str) {
+      public static String camelCase(String str) {
         StringBuilder result = new StringBuilder();
-        boolean newWord = true;
+        boolean isFirstCharacter = true; // Flag to track the first character of the first word
+        boolean isNewWord = false; // Flag to track the start of a new word
+
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
             if (ch == ' ') {
-                newWord = true;
-            } else if (newWord) {
-                result.append(i == 0 ? Character.toLowerCase(ch) : Character.toUpperCase(ch));
-                newWord = false;
+                isNewWord = true; // Next non-space character should start a new word
             } else {
-                result.append(Character.toLowerCase(ch));
+                if (isFirstCharacter) {
+                    result.append(Character.toLowerCase(ch));
+                    isFirstCharacter = false;
+                } else if (isNewWord) {
+                    result.append(Character.toUpperCase(ch));
+                    isNewWord = false;
+                } else {
+                    result.append(Character.toLowerCase(ch));
+                }
             }
         }
         return result.toString();
