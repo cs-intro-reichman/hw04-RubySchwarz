@@ -15,6 +15,7 @@ public class ArrayOps {
     public static int secondMaxValue(int[] array) {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
+        
         for (int num : array) {
             if (num > max) {
                 secondMax = max;
@@ -23,7 +24,8 @@ public class ArrayOps {
                 secondMax = num;
             }
         }
-        return secondMax;
+        
+        return (secondMax == Integer.MIN_VALUE || secondMax == max) ? -1 : secondMax;
     }
 
     // Corrected Method to check if two arrays contain the same unique elements
