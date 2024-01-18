@@ -16,7 +16,7 @@ public class ArrayOps {
         return totalSum - sum;
     }
 
-    // Revised method to find the second maximum value in an array
+   // Revised method to find the second maximum unique value in an array
     public static int secondMaxValue(int[] array) {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
@@ -25,10 +25,13 @@ public class ArrayOps {
             if (num > max) {
                 secondMax = max;
                 max = num;
-            } else if (num > secondMax && num < max) {
+            } else if (num > secondMax && num != max) {
                 secondMax = num;
             }
         }
+
+        return secondMax;
+    }
 
         // If the largest number appears more than once, the second largest is the same
         if (secondMax == Integer.MIN_VALUE) {
