@@ -11,7 +11,7 @@ public class ArrayOps {
         return totalSum - arraySum;
     }
 
-    // Method to find the second maximum value in an array
+    // Corrected Method to find the second maximum value in an array
     public static int secondMaxValue(int[] array) {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
@@ -23,25 +23,27 @@ public class ArrayOps {
                 secondMax = num;
             }
         }
-        return secondMax;
+        return (secondMax == Integer.MIN_VALUE) ? max : secondMax;
     }
 
-    // Method to check if two arrays contain the same elements
+    // Corrected Method to check if two arrays contain the same elements
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
         java.util.Map<Integer, Integer> countMap = new java.util.HashMap<>();
         for (int num : array1) {
             countMap.put(num, countMap.getOrDefault(num, 0) + 1);
         }
         for (int num : array2) {
-            if (!countMap.containsKey(num)) {
+            if (!countMap.containsKey(num) || countMap.get(num) == 0) {
                 return false;
             }
             countMap.put(num, countMap.get(num) - 1);
-            if (countMap.get(num) == 0) {
-                countMap.remove(num);
+        }
+        for (int count : countMap.values()) {
+            if (count != 0) {
+                return false;
             }
         }
-        return countMap.isEmpty();
+        return true;
     }
 
     // Method to check if an array is sorted (either increasing or decreasing order)
