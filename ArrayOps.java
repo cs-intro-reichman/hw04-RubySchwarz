@@ -16,6 +16,7 @@ public class ArrayOps {
     public static int secondMaxValue(int[] array) {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
+
         for (int num : array) {
             if (num > max) {
                 secondMax = max;
@@ -24,16 +25,26 @@ public class ArrayOps {
                 secondMax = num;
             }
         }
+        
+        if (secondMax == Integer.MIN_VALUE) {
+            return max; // In case all elements are the same
+        }
+
         return secondMax;
     }
 
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
-        if (array1.length != array2.length) {
-            return false;
+        java.util.HashMap<Integer, Integer> counts1 = new java.util.HashMap<>();
+        for (int num : array1) {
+            counts1.put(num, counts1.getOrDefault(num, 0) + 1);
         }
-        java.util.Arrays.sort(array1);
-        java.util.Arrays.sort(array2);
-        return java.util.Arrays.equals(array1, array2);
+
+        java.util.HashMap<Integer, Integer> counts2 = new java.util.HashMap<>();
+        for (int num : array2) {
+            counts2.put(num, counts2.getOrDefault(num, 0) + 1);
+        }
+
+        return counts1.equals(counts2);
     }
 
     public static boolean isSorted(int[] array) {
