@@ -20,19 +20,19 @@ public class ArrayOps {
     public static int secondMaxValue(int[] array) {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
-        
+
         for (int num : array) {
             if (num > max) {
                 secondMax = max;
                 max = num;
-            } else if (num > secondMax && num != max) {
+            } else if (num > secondMax && num < max) {
                 secondMax = num;
             }
         }
 
-        // In case the largest number appears more than once
+        // If the largest number appears more than once, the second largest is the same
         if (secondMax == Integer.MIN_VALUE) {
-            return max;
+            secondMax = max;
         }
 
         return secondMax;
