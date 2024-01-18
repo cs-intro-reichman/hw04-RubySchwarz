@@ -23,7 +23,7 @@ public class ArrayOps {
                 secondMax = num;
             }
         }
-        return (secondMax == Integer.MIN_VALUE) ? max : secondMax;
+        return secondMax;
     }
 
     // Corrected Method to check if two arrays contain the same unique elements
