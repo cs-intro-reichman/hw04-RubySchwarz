@@ -12,21 +12,22 @@ public class ArrayOps {
     }
 
     // Corrected Method to find the second maximum value in an array
-    public static int secondMaxValue(int[] array) {
-        int max = Integer.MIN_VALUE;
-        int secondMax = Integer.MIN_VALUE;
-        
-        for (int num : array) {
-            if (num > max) {
-                secondMax = max;
-                max = num;
-            } else if (num > secondMax && num != max) {
+    public static int secondMaxValue(int[] arr) {
+         int firstMax = Integer.MIN_VALUE;
+         int secondMax = Integer.MIN_VALUE;
+    
+         for (int num : arr) {
+            if (num > firstMax) {
+                 secondMax = firstMax;
+                 firstMax = num;
+            } else if (num > secondMax && num < firstMax) {
                 secondMax = num;
-            }
         }
-        
-        return (secondMax == Integer.MIN_VALUE || secondMax == max) ? -1 : secondMax;
     }
+    
+    return secondMax;
+}
+
 
     // Corrected Method to check if two arrays contain the same unique elements
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
