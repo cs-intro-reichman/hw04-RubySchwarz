@@ -28,7 +28,6 @@ public class ArrayOps {
     return secondMax;
 }
 
-
     // Corrected Method to check if two arrays contain the same unique elements
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
         java.util.Set<Integer> set1 = new java.util.HashSet<>();
