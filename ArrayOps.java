@@ -1,70 +1,65 @@
-public class StringOps {
-    // Method to capitalize vowels and lower case the rest
-    public static String capVowelsLowRest(String str) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if ("AEIOUaeiou".indexOf(c) >= 0) {
-                result.append(Character.toUpperCase(c));
-            } else {
-                result.append(Character.toLowerCase(c));
-            }
+public class ArrayOps {
+
+    // Method to find the missing integer in an array
+    public static int findMissingInt(int[] array) {
+        int n = array.length;
+        int totalSum = n * (n + 1) / 2;
+        int arraySum = 0;
+        for (int num : array) {
+            arraySum += num;
         }
-        return result.toString();
+        return totalSum - arraySum;
     }
 
-    // Corrected Method to convert to camel case
-    public static String camelCase(String str) {
-        StringBuilder result = new StringBuilder();
-        boolean nextUpper = false;
-        boolean isFirstWord = true;
-
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c == ' ') {
-                if (result.length() > 0) { // Avoid multiple spaces at the start
-                    nextUpper = true;
-                }
-                continue;
-            }
-
-            if (isFirstWord) {
-                result.append(Character.toLowerCase(c));
-                isFirstWord = false;
-            } else if (nextUpper) {
-                result.append(Character.toUpperCase(c));
-                nextUpper = false;
-            } else {
-                result.append(Character.toLowerCase(c));
+    // Corrected Method to find the second maximum value in an array
+    public static int secondMaxValue(int[] array) {
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
+        
+        for (int num : array) {
+            if (num > max) {
+                secondMax = max;
+                max = num;
+            } else if (num > secondMax && num != max) {
+                secondMax = num;
             }
         }
-        return result.toString();
+        
+        return (secondMax == Integer.MIN_VALUE || secondMax == max) ? -1 : secondMax;
     }
 
-    // Method to find all indexes of a given character
-    public static int[] allIndexOf(String str, char ch) {
-        int count = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ch) {
-                count++;
-            }
+    // Corrected Method to check if two arrays contain the same unique elements
+    public static boolean containsTheSameElements(int[] array1, int[] array2) {
+        java.util.Set<Integer> set1 = new java.util.HashSet<>();
+        java.util.Set<Integer> set2 = new java.util.HashSet<>();
+
+        for (int num : array1) {
+            set1.add(num);
+        }
+        for (int num : array2) {
+            set2.add(num);
         }
 
-        int[] indexes = new int[count];
-        int idx = 0;
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ch) {
-                indexes[idx++] = i;
-            }
-        }
-
-        return indexes;
+        return set1.equals(set2);
     }
 
-    // Main method for testing
+    // Method to check if an array is sorted (either increasing or decreasing order)
+    public static boolean isSorted(int[] array) {
+        boolean increasing = true;
+        boolean decreasing = true;
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                increasing = false;
+            }
+            if (array[i] < array[i + 1]) {
+                decreasing = false;
+            }
+        }
+        return increasing || decreasing;
+    }
+
+    // Main method
     public static void main(String[] args) {
-        System.out.println(capVowelsLowRest("Hello World"));
-        System.out.println(camelCase("Hello World"));
-        System.out.println(java.util.Arrays.toString(allIndexOf("Hello World", 'l')));
+        // The main method can be used for testing the methods
     }
 }
