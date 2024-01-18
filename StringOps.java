@@ -13,17 +13,25 @@ public class StringOps {
         return result.toString();
     }
 
-    // Method to convert to camel case
+    // Corrected Method to convert to camel case
     public static String camelCase(String str) {
         StringBuilder result = new StringBuilder();
         boolean nextUpper = false;
+        boolean isFirstWord = true;
+
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
             if (c == ' ') {
-                nextUpper = true;
+                if (result.length() > 0) { // Avoid multiple spaces at the start
+                    nextUpper = true;
+                }
                 continue;
             }
-            if (result.length() == 0 || nextUpper) {
+
+            if (isFirstWord) {
+                result.append(Character.toLowerCase(c));
+                isFirstWord = false;
+            } else if (nextUpper) {
                 result.append(Character.toUpperCase(c));
                 nextUpper = false;
             } else {
@@ -53,4 +61,10 @@ public class StringOps {
         return indexes;
     }
 
+    // Main method for testing
+    public static void main(String[] args) {
+        System.out.println(capVowelsLowRest("Hello World"));
+        System.out.println(camelCase("Hello World"));
+        System.out.println(java.util.Arrays.toString(allIndexOf("Hello World", 'l')));
+    }
 }
