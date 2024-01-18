@@ -26,24 +26,19 @@ public class ArrayOps {
         return (secondMax == Integer.MIN_VALUE) ? max : secondMax;
     }
 
-    // Corrected Method to check if two arrays contain the same elements
+    // Corrected Method to check if two arrays contain the same unique elements
     public static boolean containsTheSameElements(int[] array1, int[] array2) {
-        java.util.Map<Integer, Integer> countMap = new java.util.HashMap<>();
+        java.util.Set<Integer> set1 = new java.util.HashSet<>();
+        java.util.Set<Integer> set2 = new java.util.HashSet<>();
+
         for (int num : array1) {
-            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+            set1.add(num);
         }
         for (int num : array2) {
-            if (!countMap.containsKey(num) || countMap.get(num) == 0) {
-                return false;
-            }
-            countMap.put(num, countMap.get(num) - 1);
+            set2.add(num);
         }
-        for (int count : countMap.values()) {
-            if (count != 0) {
-                return false;
-            }
-        }
-        return true;
+
+        return set1.equals(set2);
     }
 
     // Method to check if an array is sorted (either increasing or decreasing order)
